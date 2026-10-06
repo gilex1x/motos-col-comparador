@@ -8,11 +8,11 @@ function MotoCard({ moto }: { moto: Moto }) {
         maximumFractionDigits: 0,
     }).format(moto.price.totalEstimatedPrice);
 
-    const { addItem, removeItem, isInCompare, clearCompare } = useCompare();
-
+    const { addItem, removeItem, isInCompare } = useCompare();
+    const selected = isInCompare(moto.id);
 
     return (
-        <div className="flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="flex flex-col overflow-hidden align-center rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
             {/* Imagen destacada */}
             <div className="relative aspect-video w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                 <img
@@ -59,7 +59,12 @@ function MotoCard({ moto }: { moto: Moto }) {
             </div>
 
             <div className="flex flex-1">
-                <button>Comparar</button>
+                <button
+                    onClick={() => selected ? removeItem(moto.id) : addItem(moto)}
+                    className={`m-2 px-3 py-1 text-xs rounded-md ${selected ? 'bg-red-500 text-white' :
+                        'bg-zinc-800 text-white'}`}>
+                    {selected ? "Quitar del comparador" : "Comparar"}
+                </button>
             </div>
         </div>
     );
