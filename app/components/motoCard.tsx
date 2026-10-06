@@ -1,4 +1,5 @@
 import type { Moto } from "@/types/moto";
+import { useCompare } from "../compare-provider";
 
 function MotoCard({ moto }: { moto: Moto }) {
     const formattedPrice = new Intl.NumberFormat("es-CO", {
@@ -6,6 +7,9 @@ function MotoCard({ moto }: { moto: Moto }) {
         currency: "COP",
         maximumFractionDigits: 0,
     }).format(moto.price.totalEstimatedPrice);
+
+    const { addItem, removeItem, isInCompare, clearCompare } = useCompare();
+
 
     return (
         <div className="flex flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
@@ -52,6 +56,10 @@ function MotoCard({ moto }: { moto: Moto }) {
                         </p>
                     </div>
                 </div>
+            </div>
+
+            <div className="flex flex-1">
+                <button>Comparar</button>
             </div>
         </div>
     );

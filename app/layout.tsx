@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { CompareProvider } from "./compare-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-1">{children}</body>
+      <body className="min-h-screen flex flex-col w-full">
+        <CompareProvider>
+          {children}
+        </CompareProvider>
+      </body>
     </html>
   );
 }
