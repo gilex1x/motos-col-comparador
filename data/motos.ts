@@ -5,10 +5,12 @@ export async function getMotos(params: {
   query?: string;
   brand?: string;
   category?: string;
+  minPrice?: number;
+  maxPrice?: number;
   page?: number;
   limit?: number;
 } = {}): Promise<{ motos: Moto[], totalPages: number }> {
-  const { query, brand, category, page = 1, limit = 12 } = params || {};
+  const { query, brand, category, minPrice, maxPrice, page = 1, limit = 12 } = params || {};
   const from = (page - 1) * limit;
   const to = from + limit - 1;
   let queryBuilder = supabase
@@ -22,6 +24,12 @@ export async function getMotos(params: {
   }
   if (category) {
     queryBuilder = queryBuilder.eq('category', category);
+  }
+  if (minPrice) {
+    queryBuilder = queryBuilder.gte('price_total_estimated', minPrice);
+  }
+  if (maxPrice) {
+    queryBuilder = queryBuilder.lte('price_total_estimated', maxPrice);
   }
   const { data, count, error } = await queryBuilder.range(from, to);
 

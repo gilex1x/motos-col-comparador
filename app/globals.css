@@ -1,21 +1,44 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Color Hunt Palette: https://colorhunt.co/palette/22283131363f76abaeeeeeee */
+  --ch-dark: #222831;
+  --ch-medium: #31363F;
+  --ch-accent: #76ABAE;
+  --ch-light: #EEEEEE;
+
+  /* Default (Light) Mode */
+  --background: var(--ch-light);
+  --foreground: var(--ch-dark);
+  --primary: var(--ch-accent);
+  --primary-hover: var(--ch-medium);
+  --secondary: #e5e5e5; /* A light color for secondary background to contrast with dark foreground */
+  --card-bg: #ffffff;
+  --border-color: #d1d5db; /* A softer gray for borders in light mode to not overwhelm */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-card: var(--card-bg);
+  --color-border: var(--border-color);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--ch-dark);
+    --foreground: var(--ch-light);
+    --primary: var(--ch-accent);
+    --primary-hover: var(--ch-light);
+    --secondary: var(--ch-medium);
+    --card-bg: var(--ch-medium);
+    --border-color: var(--ch-accent);
   }
 }
 

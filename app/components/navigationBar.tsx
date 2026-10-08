@@ -6,12 +6,11 @@ import { useCompare } from "../compare-provider"
 const NavigationBar = () => {
     const { addItem, removeItem, compareList } = useCompare();
     return (
-        <nav className='flex full-w justify-center p-4'>
-            <ul className='flex full-w justify-between gap-4'>
+        <nav className='flex w-full justify-center p-4 bg-secondary'>
+            <ul className='flex w-full max-w-7xl justify-between gap-4'>
                 <li>
                     <Link href="/"
-                        className="rounded-md bg-zinc-900 px-3 py-1.5 text-xs text-white dark:bg-zinc-100
-                             dark:text-zinc-900"
+                        className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
                     >
                         Inicio
                     </Link>
@@ -21,10 +20,9 @@ const NavigationBar = () => {
                     compareList.length > 0 && (
                         <li>
                             <Link href="/comparador"
-                                className="rounded-md bg-zinc-900 px-3 py-1.5 text-xs text-white dark:bg-zinc-100
-                             dark:text-zinc-900"
+                                className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover shadow-sm"
                             >
-                                {compareList.length > 1 ? `Ver ${compareList.length} motos` : 'Ver 1 moto'}
+                                {compareList.length > 1 ? `Comparar ${compareList.length} motos` : 'Ver 1 moto'}
                             </Link>
                         </li>)
                 }
