@@ -442,7 +442,8 @@ export const MOTOS: Moto[] = [
   },
 ];
 
-export  function getMotos(): Moto[] {
+export async function getMotos(): Promise<Moto[]> {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   return MOTOS;
 }
 

@@ -1,3 +1,4 @@
+'use client'
 import type { Moto } from "@/types/moto";
 import { useCompare } from "../compare-provider";
 
