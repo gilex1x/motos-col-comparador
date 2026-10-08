@@ -37,6 +37,8 @@ const FilterBar = () => {
     // Estados locales para los inputs numéricos (para aplicar debounce)
     const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '');
     const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '');
+    const [minCc, setMinCc] = useState(searchParams.get('minCc') || '');
+    const [maxCc, setMaxCc] = useState(searchParams.get('maxCc') || '');
 
     const updateFilter = (key: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -69,6 +71,25 @@ const FilterBar = () => {
         }, 500);
         return () => clearTimeout(timer);
     }, [maxPrice]);
+
+    // Debounce para cilindraje
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (minCc !== (searchParams.get('minCc') || '')) {
+                updateFilter('minCc', minCc);
+            }
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [minCc]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (maxCc !== (searchParams.get('maxCc') || '')) {
+                updateFilter('maxCc', maxCc);
+            }
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [maxCc]);
 
 
     return (
@@ -121,6 +142,41 @@ const FilterBar = () => {
                         className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     />
                 </div>
+            </div>
+
+            <div className="flex flex-col">
+                <label className="text-xs font-semibold mb-1.5 opacity-80 uppercase tracking-wide">Cilindraje (CC)</label>
+                <div className="flex gap-2">
+                    <input 
+                        type="number"
+                        placeholder="Mínimo"
+                        value={minCc}
+                        onChange={(e) => setMinCc(e.target.value)}
+                        className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    />
+                    <input 
+                        type="number"
+                        placeholder="Máximo"
+                        value={maxCc}
+                        onChange={(e) => setMaxCc(e.target.value)}
+                        className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                    />
+                </div>
+            </div>
+
+            <div className="flex flex-col mt-2 pt-5 border-t border-border">
+                <label htmlFor="limit-select" className="text-xs font-semibold mb-1.5 opacity-80 uppercase tracking-wide">Resultados por página</label>
+                <select 
+                    id="limit-select"
+                    value={searchParams.get('limit') || '12'}
+                    onChange={(e) => updateFilter('limit', e.target.value)}
+                    className="w-full rounded-lg border border-border bg-card px-3 py-2.5 text-sm text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer"
+                >
+                    <option value="12">12 motos</option>
+                    <option value="24">24 motos</option>
+                    <option value="48">48 motos</option>
+                    <option value="96">96 motos</option>
+                </select>
             </div>
         </div>
     );

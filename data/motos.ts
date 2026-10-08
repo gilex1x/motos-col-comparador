@@ -7,10 +7,12 @@ export async function getMotos(params: {
   category?: string;
   minPrice?: number;
   maxPrice?: number;
+  minCc?: number;
+  maxCc?: number;
   page?: number;
   limit?: number;
 } = {}): Promise<{ motos: Moto[], totalPages: number }> {
-  const { query, brand, category, minPrice, maxPrice, page = 1, limit = 12 } = params || {};
+  const { query, brand, category, minPrice, maxPrice, minCc, maxCc, page = 1, limit = 12 } = params || {};
   const from = (page - 1) * limit;
   const to = from + limit - 1;
   let queryBuilder = supabase
@@ -30,6 +32,12 @@ export async function getMotos(params: {
   }
   if (maxPrice) {
     queryBuilder = queryBuilder.lte('price_total_estimated', maxPrice);
+  }
+  if (minCc) {
+    queryBuilder = queryBuilder.gte('engine_displacement', minCc);
+  }
+  if (maxCc) {
+    queryBuilder = queryBuilder.lte('engine_displacement', maxCc);
   }
   const { data, count, error } = await queryBuilder.range(from, to);
 

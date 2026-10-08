@@ -8,7 +8,7 @@ import FilterBar from './components/filtersBar';
 import SkeletonCard from './components/skeletonCard';
 import Pagination from './components/pagination';
 
-async function MotosList({ params }: { params?: { query?: string, page?: number, brand?: string, category?: string, minPrice?: number, maxPrice?: number } } = {}) {
+async function MotosList({ params }: { params?: { query?: string, page?: number, limit?: number, brand?: string, category?: string, minPrice?: number, maxPrice?: number, minCc?: number, maxCc?: number } } = {}) {
     const { motos, totalPages } = await getMotos(params);
 
     if (motos.length === 0) {
@@ -34,10 +34,10 @@ async function MotosList({ params }: { params?: { query?: string, page?: number,
     );
 }
 
-function MotosSkeleton() {
+function MotosSkeleton({ limit }: { limit: number }) {
     return (
         <ListItems>
-            {Array.from({ length: 12 }).map((_, i) => (
+            {Array.from({ length: limit }).map((_, i) => (
                 <li key={i}><SkeletonCard /></li>
             ))}
         </ListItems>
@@ -48,10 +48,13 @@ export default async function Home(props: { searchParams: Promise<{ [key: string
     const searchParams = await props.searchParams;
     const query = typeof searchParams.query === 'string' ? searchParams.query : '';
     const page = typeof searchParams.page === 'string' ? Number(searchParams.page) : 1;
+    const limit = typeof searchParams.limit === 'string' ? Number(searchParams.limit) : 12;
     const brand = typeof searchParams.brand === 'string' ? searchParams.brand : undefined;
     const category = typeof searchParams.category === 'string' ? searchParams.category : undefined;
     const minPrice = typeof searchParams.minPrice === 'string' && !isNaN(Number(searchParams.minPrice)) ? Number(searchParams.minPrice) : undefined;
     const maxPrice = typeof searchParams.maxPrice === 'string' && !isNaN(Number(searchParams.maxPrice)) ? Number(searchParams.maxPrice) : undefined;
+    const minCc = typeof searchParams.minCc === 'string' && !isNaN(Number(searchParams.minCc)) ? Number(searchParams.minCc) : undefined;
+    const maxCc = typeof searchParams.maxCc === 'string' && !isNaN(Number(searchParams.maxCc)) ? Number(searchParams.maxCc) : undefined;
 
     return (
         <main className="mx-auto flex flex-1 w-full flex-col md:flex-row py-8 px-6 sm:px-8 gap-8">
@@ -63,8 +66,8 @@ export default async function Home(props: { searchParams: Promise<{ [key: string
             </aside>
 
             <div className="w-full flex-1">
-                <Suspense key={query + page + brand + category + minPrice + maxPrice} fallback={<MotosSkeleton />}>
-                    <MotosList params={{ query, page, brand, category, minPrice, maxPrice }} />
+                <Suspense key={query + page + limit + brand + category + minPrice + maxPrice + (minCc||0) + (maxCc||0)} fallback={<MotosSkeleton limit={limit} />}>
+                    <MotosList params={{ query, page, limit, brand, category, minPrice, maxPrice, minCc, maxCc }} />
                 </Suspense>
             </div>
         </main>

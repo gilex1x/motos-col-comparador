@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Motos Colombia Comparador 🏍️
 
-## Getting Started
+Plataforma web desarrollada para ayudar a los usuarios en Colombia a comparar de manera rápida y sencilla especificaciones técnicas, dimensiones y precios estimados de diversas motocicletas disponibles en el mercado.
 
-First, run the development server:
+## ⚠️ Aviso Legal e Independencia
+**Motos Colombia Comparador** es una herramienta informativa e independiente. **No está afiliada de manera comercial ni oficial** a ninguna ensambladora, marca de motocicletas, concesionario o plataforma de compra y venta mencionada en este sitio. Los datos, especificaciones y precios son puramente referenciales.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔒 Privacidad
+Este proyecto fue diseñado respetando la privacidad del usuario. **No se almacenan, recopilan ni procesan datos personales**. No requerimos registro para utilizar nuestras herramientas de comparación.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tecnologías Utilizadas
+- [Next.js 15](https://nextjs.org/) (App Router & Server Components)
+- [React 19](https://react.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Supabase](https://supabase.com/) (PostgreSQL & Backend as a Service)
+- Generación de sitios estáticos (SSG) para alto rendimiento y SEO.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📜 Licencia y Uso del Código
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+El código fuente de este proyecto es público y está disponible en este repositorio. Su propósito es servir como referencia, portafolio y recurso educativo.
 
-## Learn More
+**Autor:** Gilberto Santamaria
 
-To learn more about Next.js, take a look at the following resources:
+### Condiciones de Uso:
+- ✅ Puedes leer, analizar y aprender del código.
+- ✅ Puedes hacer un "fork" del proyecto para uso estrictamente personal y educativo.
+- ❌ **No puedes utilizar este código para fines comerciales** sin haber solicitado y obtenido una autorización explícita y por escrito del autor.
+- ❌ No puedes empaquetar, vender o redistribuir esta plataforma como propia.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Para más detalles, consulta el archivo [LICENSE](LICENSE) incluido en este repositorio.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Instalación Local (Desarrollo)
 
-## Deploy on Vercel
+Si deseas correr el proyecto en tu entorno local para estudiarlo:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clona el repositorio:
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd motos-col-comparador
+   ```
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+3. Configura tus variables de entorno conectadas a tu propia instancia de Supabase en un archivo `.env.local`:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=tu_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_key
+   ```
+4. Corre el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.

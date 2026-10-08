@@ -15,7 +15,13 @@ const NavigationBar = () => {
                         Inicio
                     </Link>
                 </li>
-                <li>Info</li>
+                <li>
+                    <Link href="/marcas"
+                        className="rounded-md px-4 py-2 text-sm font-semibold text-foreground opacity-80 transition-colors hover:opacity-100 hover:bg-black/5 dark:hover:bg-white/5"
+                    >
+                        Marcas
+                    </Link>
+                </li>
                 {
                     compareList.length > 0 && (
                         <li>
