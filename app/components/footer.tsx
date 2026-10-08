@@ -13,7 +13,7 @@ export default function Footer() {
                     <Link href="/terminos" className="opacity-70 hover:opacity-100 hover:text-primary transition-colors">
                         Términos y Condiciones
                     </Link>
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 transition-colors">
+                    <a href="https://github.com/gilex1x/motos-col-comparador" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 transition-colors">
                         Repositorio
                     </a>
                 </nav>
