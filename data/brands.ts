@@ -5,12 +5,16 @@ export interface BrandDetails {
     slug: string;
     description: string;
     logoUrl: string;
+    country?: string;
+    officialImporter?: string; // ej. Incolmotos, Auteco, Corbeta
+    website?: string;
+    motoCount?: number;
 }
 
 export async function getAllBrands(): Promise<BrandDetails[]> {
     const { data, error } = await supabase
         .from('brands')
-        .select('name, slug, description, logo_url');
+        .select('name, slug, description, logo_url, website');
 
     if (error || !data) {
         console.error("Error fetching brands:", error);
@@ -21,14 +25,15 @@ export async function getAllBrands(): Promise<BrandDetails[]> {
         name: item.name,
         slug: item.slug,
         description: item.description || '',
-        logoUrl: item.logo_url || ''
+        logoUrl: item.logo_url || '',
+        website: item.website || undefined
     }));
 }
 
 export async function getBrandBySlug(slug: string): Promise<BrandDetails | undefined> {
     const { data, error } = await supabase
         .from('brands')
-        .select('name, slug, description, logo_url')
+        .select('name, slug, description, logo_url, website')
         .eq('slug', slug)
         .single();
 
@@ -40,6 +45,7 @@ export async function getBrandBySlug(slug: string): Promise<BrandDetails | undef
         name: data.name,
         slug: data.slug,
         description: data.description || '',
-        logoUrl: data.logo_url || ''
+        logoUrl: data.logo_url || '',
+        website: data.website || undefined
     };
 }
